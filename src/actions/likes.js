@@ -1,7 +1,7 @@
 const config = require("../../config");
 const shuffle = require("../utils/arrayShuffle");
 const randMillis = require("../utils/randomMillis");
-const comment = require("./comments");
+/*const comment = require("./comments");*/
 
 
 const likes = async (page) => {
@@ -24,9 +24,9 @@ const likes = async (page) => {
                                     if (Math.random() < 0.7) {
                                         console.log('Лайкну пожалуй')
                                         await page.click('article[role=presentation] section button:nth-child(1)');
-                                        if (config.enableComments && Math.random() < 0.2) {
+                                       /* if (config.enableComments && Math.random() < 0.2) {
                                             comment(page);
-                                        }
+                                        }*/
                                         if (Math.random() < 0.2) {
                                             i--;
                                         }
