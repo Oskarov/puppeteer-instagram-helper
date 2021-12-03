@@ -3,6 +3,7 @@ const fs = require('fs');
 const login = require('./src/actions/login');
 const config = require("./config");
 const likes = require("./src/actions/likes");
+const generateBrowserHistory = require("./src/actions/generateBrowserHistory");
 const randMillis = require("./src/utils/randomMillis");
 
 (async () => {
@@ -17,6 +18,10 @@ const randMillis = require("./src/utils/randomMillis");
         preservedCookies = await JSON.parse(preservedCookies);
     } catch (e) {
         preservedCookies = undefined;
+    }
+
+    if (config.enablePortals){
+        generateBrowserHistory(page);
     }
 
     if (!!preservedCookies) {
