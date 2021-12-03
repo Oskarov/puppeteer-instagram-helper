@@ -1,6 +1,6 @@
-const randomNum = (num) => {
-    let rand = 1 - 0.5 + Math.random() * (num - 1);
-    return Math.round(rand);
+const randomNum = (min, max) => {
+    let rand = min + Math.random() * (max + 1 - min);
+    return Math.floor(rand);
 }
 
 module.exports = randomNum;

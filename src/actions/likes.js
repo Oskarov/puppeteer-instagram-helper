@@ -1,13 +1,14 @@
 const config = require("../../config");
 const shuffle = require("../utils/arrayShuffle");
 const randMillis = require("../utils/randomMillis");
+const randNum = require("../utils/randomNum");
 /*const comment = require("./comments");*/
 
 
 const likes = async (page) => {
     let hashArr = shuffle(config.hashtags);
-
-    for (let j = 0; j < hashArr.length; j++) {
+    const numOfTags = hashArr.length - randNum(0, 3);
+    for (let j = 0; j < numOfTags; j++) {
         try {
             await page.goto(`https://www.instagram.com/explore/tags/${hashArr[j]}`, {waitUntil: 'load', timeout: 0});
 
@@ -15,7 +16,8 @@ const likes = async (page) => {
                 await page.waitForSelector('header button').then(
                     async selector => {
                         await page.click('article:nth-child(2) > div:nth-child(3) a:nth-child(1)');
-                        for (let i = config.maxLikesPerHashTag; i > 0; i--) {
+                        let likesPerTag = config.maxLikesPerHashTag + randNum(0, 10);
+                        for (let i = likesPerTag; i > 0; i--) {
                             await page.waitForSelector('article[role=presentation]').then(
                                 async selector => {
                                     await page.waitForTimeout(randMillis(10000));
@@ -41,7 +43,7 @@ const likes = async (page) => {
                             );
                         }
                     });
-            } catch (e){
+            } catch (e) {
                 console.log(`Какая-то проблема с тегом ${hashArr[j]}`);
             }
             console.log(`Закончил с хэштегом ${hashArr[j]}`);

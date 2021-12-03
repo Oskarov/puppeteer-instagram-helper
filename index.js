@@ -20,8 +20,8 @@ const randMillis = require("./src/utils/randomMillis");
         preservedCookies = undefined;
     }
 
-    if (config.enablePortals){
-        generateBrowserHistory(page);
+    if (config.enablePortals) {
+        await generateBrowserHistory(page);
     }
 
     if (!!preservedCookies) {
