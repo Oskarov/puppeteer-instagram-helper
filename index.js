@@ -21,9 +21,9 @@ const randMillis = require("./src/utils/randomMillis");
 
     if (!!preservedCookies) {
         await page.setCookie(...preservedCookies);
-        await page.goto("https://www.instagram.com/");
+        await page.goto("https://www.instagram.com/", {waitUntil: 'load', timeout: 0});
     } else {
-        await page.goto("https://www.instagram.com/");
+        await page.goto("https://www.instagram.com/", {waitUntil: 'load', timeout: 0});
         await login(page);
     }
 
