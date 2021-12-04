@@ -4,17 +4,18 @@ const randNum = require("../utils/randomNum");
 const randMillis = require("../utils/randomMillis");
 
 
-const generateBrowserHistory = async (page) => {
+const generateBrowserHistory = async (page, portalsCount = config.portalsPerStart) => {
     console.log('будем творить историю')
     let portals = shuffle(config.portals);
-    let iteration = config.portalsPerStart + (randNum(1, 3));
+    let iteration = portalsCount + (randNum(1, 3));
     for (let i = 0; i < iteration; i++) {
         try {
             await page.goto(portals[i]);
             console.log(`Выбран портал: ${portals[i]}`);
             await page.waitForTimeout(2000);
             let rand = randNum(1, 5);
-            for (let j = 0; rand; j++) {
+            console.log(rand);
+            for (let j = 0; j < rand; j++) {
                 let links = await page.$$eval('a', as => as.map(a => a.href));
                 links = shuffle(links);
                 if (links[0].indexOf('instagram') === -1) {

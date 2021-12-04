@@ -2,6 +2,7 @@ const config = require("../../config");
 const shuffle = require("../utils/arrayShuffle");
 const randMillis = require("../utils/randomMillis");
 const randNum = require("../utils/randomNum");
+const generateBrowserHistory = require("./generateBrowserHistory");
 /*const comment = require("./comments");*/
 
 
@@ -47,6 +48,10 @@ const likes = async (page) => {
                 console.log(`Какая-то проблема с тегом ${hashArr[j]}`);
             }
             console.log(`Закончил с хэштегом ${hashArr[j]}`);
+            if (Math.random() < 0.3) {
+                await generateBrowserHistory(page, randNum(1, 3));
+                await page.goto(`https://www.instagram.com/`, {waitUntil: 'load', timeout: 0});
+            }
             await page.waitForTimeout(randMillis(1000 * 60 * 20));
         } catch (e) {
             console.log('Что-то пошло не так')
