@@ -25,7 +25,7 @@ const likes = async (page) => {
                                     let likeText = await page.$eval('article[role=presentation] section button:nth-child(1) svg', el => el.getAttribute('aria-label'));
                                     if (likeText === 'Нравится') {
                                         console.log('Можно лайкнуть')
-                                        if (Math.random() < 0.7) {
+                                        if (Math.random() < 0.6) {
                                             console.log('Лайкну пожалуй')
                                             await page.click('article[role=presentation] section button:nth-child(1)');
                                             /* if (config.enableComments && Math.random() < 0.2) {
@@ -36,7 +36,7 @@ const likes = async (page) => {
                                             }
                                         }
                                     }
-                                    /* await page.click('div[role=dialog] button:last-child');*/
+                                    await page.waitForTimeout(randMillis(3000));
                                     page.keyboard.press('ArrowRight');
                                     console.log(i);
                                     console.log('----------------');
@@ -50,7 +50,6 @@ const likes = async (page) => {
             console.log(`Закончил с хэштегом ${hashArr[j]}`);
             if (Math.random() < 0.3) {
                 await generateBrowserHistory(page, randNum(1, 3));
-                await page.goto(`https://www.instagram.com/`, {waitUntil: 'load', timeout: 0});
             }
             await page.waitForTimeout(randMillis(1000 * 60 * 20));
         } catch (e) {
