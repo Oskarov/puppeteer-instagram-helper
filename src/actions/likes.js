@@ -9,6 +9,7 @@ const generateBrowserHistory = require("./generateBrowserHistory");
 const likes = async (page) => {
     let hashArr = shuffle(config.hashtags);
     const numOfTags = hashArr.length - randNum(0, 3);
+    let likesCount = 0;
     for (let j = 0; j < numOfTags; j++) {
         try {
             await page.goto(`https://www.instagram.com/explore/tags/${hashArr[j]}`, {waitUntil: 'load', timeout: 0});
@@ -28,6 +29,7 @@ const likes = async (page) => {
                                         if (Math.random() < 0.6) {
                                             console.log('Лайкну пожалуй')
                                             await page.click('article[role=presentation] section button:nth-child(1)');
+                                            likesCount++;
                                             /* if (config.enableComments && Math.random() < 0.2) {
                                                  comment(page);
                                              }*/
@@ -58,6 +60,7 @@ const likes = async (page) => {
         }
     }
     console.log('Задача правда выполнена');
+    console.log(`Лайков поставлено за сессию: ${likesCount}`);
 }
 
 module.exports = likes;
