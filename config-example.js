@@ -3,6 +3,7 @@ const config = {
     password: "", //пароль - password
 
     enableLikes: true, // разрешить основной функционал - basic functionality
+    likesChance: 0.7, //процент поставленных лайков от 0.1 до 0.9 - chance of like per card from 0.1 to 0.9
     enableComments: true, // разрешить оставлять комментарии - leave comments
     enablePortals: true, // разрешить генерацию браузерной истории - generation of browser history
     portalsPerStart: 5, // сколько сайтов посетить перед основной работой - count of the sites visited before the basic work

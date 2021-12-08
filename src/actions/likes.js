@@ -26,7 +26,7 @@ const likes = async (page) => {
                                     let likeText = await page.$eval('article[role=presentation] section button:nth-child(1) svg', el => el.getAttribute('aria-label'));
                                     if (likeText === 'Нравится') {
                                         console.log('Можно лайкнуть')
-                                        if (Math.random() < 0.6) {
+                                        if (Math.random() < config.likesChance) {
                                             console.log('Лайкну пожалуй')
                                             await page.click('article[role=presentation] section button:nth-child(1)');
                                             likesCount++;
