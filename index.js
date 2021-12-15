@@ -9,7 +9,10 @@ const randMillis = require("./src/utils/randomMillis");
 (async () => {
     const browser = await puppeteer.launch({
         headless: false,
-        slowMo: 50
+        slowMo: 50,
+        args:[
+            '--mute-audio'
+        ]
     });
     let page = await browser.newPage();
     let preservedCookies = undefined;
