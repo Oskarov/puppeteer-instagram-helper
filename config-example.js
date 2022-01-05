@@ -2,6 +2,9 @@ const config = {
     login: "", //логин - login
     password: "", //пароль - password
 
+    width: 300, //window's width - ширина браузера
+    height: 300, //window's heights - высота браузера
+
     enableLikes: true, // разрешить основной функционал - basic functionality
     likesChance: 0.7, //процент поставленных лайков от 0.1 до 0.9 - chance of like per card from 0.1 to 0.9
     enableComments: true, // разрешить оставлять комментарии - leave comments

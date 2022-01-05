@@ -11,7 +11,8 @@ const randMillis = require("./src/utils/randomMillis");
         headless: false,
         slowMo: 50,
         args:[
-            '--mute-audio'
+            '--mute-audio',
+            `--window-size=${config.width},${config.height}`
         ]
     });
     let page = await browser.newPage();
@@ -47,7 +48,7 @@ const randMillis = require("./src/utils/randomMillis");
                 await likes(page);
                 console.log('Через примерно день начнётся новая задача');
             }
-            await page.waitForTimeout((1000 * 60 * 60 * 24) - randMillis(1000 * 60 * 60 * 4));
+            await page.waitForTimeout((1000 * 60 * 60 * 9) - randMillis(1000 * 60 * 60 * 2));
         }
     } catch (e) {
         console.log(e);
