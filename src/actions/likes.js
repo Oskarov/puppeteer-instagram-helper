@@ -59,8 +59,10 @@ const likes = async (page) => {
             console.log(e);
         }
     }
-    console.log('Задача правда выполнена');
+    let currentDate = new Date();
+    console.log('Задача выполнена');
     console.log(`Лайков поставлено за сессию: ${likesCount}`);
+    console.log(`Время окончания сессии: ${currentDate.getHours()}:${currentDate.getMinutes()}`);
 }
 
 module.exports = likes;
