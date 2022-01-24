@@ -13,6 +13,7 @@ const config = {
     enableMidPortals: true, // разрешить прерывание основной работы на другие сайты - resolve the transfer of basic work to other sites
     maxMidPortalsPerTag: 3, // максимальное количество сайтов в течении прерывания - maximum number of sites in the current flow
     maxLikesPerHashTag: 40, // количество лайков на тег - count of likes per tag
+    waitHoursForNewSession: 4, //ожидание в часах до новой сессии - new session waiting in hours
 
     hashtags: [], // теги без знака # - tags without #
     comments: [], // набор комментариев - comments

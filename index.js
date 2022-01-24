@@ -48,7 +48,7 @@ const randMillis = require("./src/utils/randomMillis");
                 await likes(page);
                 console.log('Через примерно день начнётся новая задача');
             }
-            await page.waitForTimeout((1000 * 60 * 60 * 9) - randMillis(1000 * 60 * 60 * 2));
+            await page.waitForTimeout((1000 * 60 * 60 * config.waitHoursForNewSession) - randMillis(1000 * 60 * 60));
         }
     } catch (e) {
         console.log(e);
