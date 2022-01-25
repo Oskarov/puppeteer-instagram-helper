@@ -47,7 +47,7 @@ const randMillis = require("./src/utils/randomMillis");
             let timeToWait = (1000 * 60 * 60 * config.waitHoursForNewSession) - randMillis(1000 * 60 * 60);
             if (config.enableLikes) {
                 await likes(page);
-                console.log(`Через ${timeToWait} начнётся новая задача`);
+                console.log(`Через ${config.waitHoursForNewSession} начнётся новая задача`);
             }
             await page.waitForTimeout(timeToWait);
         }
