@@ -4,12 +4,12 @@ const randMillis = require("../utils/randomMillis");
 const login = async (page) => {
     await page.waitForSelector('input[name=username]').then(
         async selector => {
-            await selector.type(config.login);
+            await selector.type(config.testMode ? config.testLogin : config.login);
         }
     )
 
 
-    await page.type('input[name=password]', config.password);
+    await page.type('input[name=password]', config.testMode ? config.testPassword : config.password);
     await page.click('button[type=submit]');
 
     await page.waitForTimeout(5000);

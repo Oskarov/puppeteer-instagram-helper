@@ -10,7 +10,7 @@ const randMillis = require("./src/utils/randomMillis");
     const browser = await puppeteer.launch({
         headless: false,
         slowMo: 50,
-        args:[
+        args: [
             '--mute-audio',
             `--window-size=${config.width},${config.height}`
         ]
@@ -24,7 +24,7 @@ const randMillis = require("./src/utils/randomMillis");
         preservedCookies = undefined;
     }
 
-    if (config.enablePortals) {
+    if (config.enablePortals && !config.testMode) {
         await generateBrowserHistory(page);
     }
 
@@ -36,11 +36,15 @@ const randMillis = require("./src/utils/randomMillis");
         await login(page);
     }
 
-    await page.waitForSelector('[role=dialog] button:nth-child(2)').then(
-        async selector => {
-            await selector.click();
-        }
-    );
+    try {
+        await page.waitForSelector('[role=dialog] button:nth-child(2)').then(
+            async selector => {
+                await selector.click();
+            }
+        );
+    } catch (e) {
+        console.log(e);
+    }
 
     try {
         while (true) {
