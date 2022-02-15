@@ -7,6 +7,7 @@ const generateBrowserHistory = require("./src/actions/generateBrowserHistory");
 const randMillis = require("./src/utils/randomMillis");
 
 (async () => {
+    let tryToReachInstagramCounts = 0;
     const browser = await puppeteer.launch({
         headless: false,
         slowMo: 50,
@@ -28,13 +29,24 @@ const randMillis = require("./src/utils/randomMillis");
         await generateBrowserHistory(page);
     }
 
-    if (!!preservedCookies) {
-        await page.setCookie(...preservedCookies);
-        await page.goto("https://www.instagram.com/", {waitUntil: 'load', timeout: 0});
-    } else {
-        await page.goto("https://www.instagram.com/", {waitUntil: 'load', timeout: 0});
-        await login(page);
-    }
+
+        while (tryToReachInstagramCounts < 3) {
+            try {
+                if (!!preservedCookies) {
+                    await page.setCookie(...preservedCookies);
+                    await page.goto("https://www.instagram.com/", {waitUntil: 'load', timeout: 0});
+                } else {
+                    await page.goto("https://www.instagram.com/", {waitUntil: 'load', timeout: 0});
+                    await login(page);
+                }
+                tryToReachInstagramCounts = 4;
+            } catch (e){
+                tryToReachInstagramCounts++;
+                console.log(e);
+            }
+        }
+
+
 
     try {
         await page.waitForSelector('[role=dialog] button:nth-child(2)').then(
@@ -53,6 +65,7 @@ const randMillis = require("./src/utils/randomMillis");
                 await likes(page);
                 console.log(`Через ${config.waitHoursForNewSession} начнётся новая задача`);
             }
+            tryToReachInstagramCounts = 0;
             await page.waitForTimeout(timeToWait);
         }
     } catch (e) {

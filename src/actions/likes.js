@@ -22,7 +22,7 @@ const likes = async (page) => {
                         for (let i = likesPerTag; i > 0; i--) {
                             await page.waitForSelector('article[role=presentation]').then(
                                 async selector => {
-                                    await page.waitForTimeout(randMillis(10000));
+                                    await page.waitForTimeout(6000 + randMillis(5000));
                                     let likeText = await page.$eval('article[role=presentation] section button:nth-child(1) svg', el => el.getAttribute('aria-label'));
                                     if (likeText === 'Нравится') {
                                         console.log('Можно лайкнуть')
